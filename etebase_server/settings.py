@@ -164,8 +164,8 @@ if any(os.path.isfile(x) for x in config_locations):
 
     if "allowed_hosts" in config:
         ALLOWED_HOSTS = [y for x, y in config.items("allowed_hosts")]
-        for d in config.items("allowed_hosts"):
-            print("d: " + d, flush=True) # DEBUG
+        for x, y in config.items("allowed_hosts"):
+            print("x: " + x + "; y: " + y, flush=True) # DEBUG
         CSRF_TRUSTED_ORIGINS = ["https://" + y for x, y in config.items("allowed_hosts")] + \
                                ["http://" + y for x, y in config.items("allowed_hosts")]
         print(ALLOWED_HOSTS, flush=True) # DEBUG
