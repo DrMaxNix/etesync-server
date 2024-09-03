@@ -167,9 +167,6 @@ if any(os.path.isfile(x) for x in config_locations):
         CSRF_TRUSTED_ORIGINS = ["https://" + y for x, y in config.items("allowed_hosts")] + \
                                ["http://" + y for x, y in config.items("allowed_hosts")]
 
-    #SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-    print("[DEBUG] SECURE_PROXY_SSL_HEADER not set", flush=True) # DEBUG
-
     if "database" in config:
         DATABASES = {"default": {x.upper(): y for x, y in config.items("database")}}
 
