@@ -35,7 +35,6 @@ SECRET_FILE = os.path.join(BASE_DIR, "secret.txt")
 DEBUG = True
 
 ALLOWED_HOSTS = []
-CSRF_TRUSTED_ORIGINS = []
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -164,16 +163,9 @@ if any(os.path.isfile(x) for x in config_locations):
         ETEBASE_REDIS_URI = section.get("redis_uri")
 
     if "allowed_hosts" in config:
-        for x, y in config.items("allowed_hosts"):
-            ALLOWED_HOSTS.append(y)
-            if y == "*":
-                CSRF_TRUSTED_ORIGINS.append("*")
-                continue
-            CSRF_TRUSTED_ORIGINS.append("https://" + y)
-            CSRF_TRUSTED_ORIGINS.append("http://" + y)
-            
-        print(ALLOWED_HOSTS, flush=True) # DEBUG
-        print(CSRF_TRUSTED_ORIGINS, flush=True) # DEBUG
+        ALLOWED_HOSTS = [y for x, y in config.items("allowed_hosts")]
+        CSRF_TRUSTED_ORIGINS = ["https://" + y for x, y in config.items("allowed_hosts")] + \
+                               ["http://" + y for x, y in config.items("allowed_hosts")]
 
     if "database" in config:
         DATABASES = {"default": {x.upper(): y for x, y in config.items("database")}}
