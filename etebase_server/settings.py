@@ -35,6 +35,7 @@ SECRET_FILE = os.path.join(BASE_DIR, "secret.txt")
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = []
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
