@@ -167,7 +167,7 @@ if any(os.path.isfile(x) for x in config_locations):
         for x, y in config.items("allowed_hosts"):
             ALLOWED_HOSTS.append(y)
             if y == "*":
-                print("sternchen", flush=True) # DEBUG
+                CSRF_TRUSTED_ORIGINS.append("*")
                 continue
             CSRF_TRUSTED_ORIGINS.append("https://" + y)
             CSRF_TRUSTED_ORIGINS.append("http://" + y)
